@@ -1,9 +1,17 @@
+:root {
+    --primary-color: #ff4081;
+    --secondary-color: #f50057;
+    --text-color: #ffffff;
+    --background-color: #000000;
+}
+
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    height: 100%;
 }
 
 .overlay {
@@ -12,7 +20,7 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     display: flex;
     flex-direction: column;
@@ -22,18 +30,26 @@ body, html {
 }
 
 .overlay h1 {
-    color: #fff;
-    font-size: 3em;
+    color: var(--text-color);
+    font-size: clamp(2em, 5vw, 3em);
     margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
 }
 
 .overlay button {
-    background-color: #ff4081;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     border: none;
-    padding: 10px 20px;
-    font-size: 1.2em;
+    padding: 15px 30px;
+    font-size: clamp(1em, 3vw, 1.2em);
     cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+.overlay button:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
 }
 
 .app-container {
@@ -41,7 +57,7 @@ body, html {
     position: relative;
     height: 100vh;
     width: 100vw;
-    max-width: 414px;
+    max-width: 100%;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -57,63 +73,111 @@ body, html {
     height: 100vh;
     scroll-snap-align: start;
     position: relative;
+    overflow: hidden;
 }
 
-video {
+video, .video-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
 }
 
 .video-overlay {
     position: absolute;
-    bottom: 20px;
+    bottom: 80px;
     left: 20px;
-    z-index: 1;
+    z-index: 5;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    padding: 20px;
+    border-radius: 10px;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
+}
+
+.video-overlay h2 {
+    margin: 0;
+    font-size: clamp(1.2em, 4vw, 1.8em);
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.video-overlay p {
+    margin: 10px 0 0;
+    font-size: clamp(0.8em, 3vw, 1em);
+    opacity: 0.8;
 }
 
 .side-bar {
     position: absolute;
     right: 10px;
-    bottom: 80px;
+    bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    z-index: 10;
 }
 
 .profile-pic img {
-    width: 50px;
-    height: 50px;
+    width: clamp(40px, 10vw, 60px);
+    height: clamp(40px, 10vw, 60px);
     border-radius: 50%;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    border: 2px solid var(--text-color);
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
 }
 
 .follow-btn {
-    background-color: #ff4081;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--text-color);
     border: none;
     border-radius: 20px;
-    padding: 5px 15px;
-    font-size: 14px;
+    padding: 8px 20px;
+    font-size: clamp(0.8em, 2vw, 1em);
     cursor: pointer;
     margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.follow-btn:hover {
+    background-color: var(--secondary-color);
+    transform: scale(1.05);
 }
 
 .action-buttons button {
     background: none;
     border: none;
-    color: #fff;
-    font-size: 24px;
-    margin: 10px 0;
+    color: var(--text-color);
+    font-size: clamp(24px, 6vw, 30px);
+    margin: 15px 0;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: all 0.3s ease;
+}
+
+.action-buttons button:hover {
+    transform: scale(1.1);
 }
 
 .like-count {
-    font-size: 12px;
+    font-size: clamp(10px, 3vw, 14px);
     margin-top: 5px;
+}
+
+.sound-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sound-toggle:hover {
+    background-color: rgba(255,255,255,0.2);
 }
 
 .bottom-nav {
@@ -124,17 +188,60 @@ video {
     display: flex;
     justify-content: space-around;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 10px 0;
+    padding: 15px 0;
+    backdrop-filter: blur(10px);
 }
 
 .nav-btn {
     background: none;
     border: none;
-    color: #fff;
-    font-size: 24px;
+    color: var(--text-color);
+    font-size: clamp(20px, 5vw, 28px);
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.nav-btn.active {
-    color: #ff4081;
+.nav-btn:hover, .nav-btn.active {
+    color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .action-buttons button:hover,
+    .follow-btn:hover,
+    .nav-btn:hover {
+        opacity: 0.8;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .video-overlay {
+        bottom: 60px;
+        left: 10px;
+        padding: 15px;
+        width: calc(100% - 20px);
+    }
+
+    .side-bar {
+        right: 5px;
+        bottom: 80px;
+    }
+    
+    .bottom-nav {
+        padding: 10px 0;
+    }
+}
+
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.video-container, .action-buttons button, .follow-btn, .nav-btn, .sound-toggle {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
 }
